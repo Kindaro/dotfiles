@@ -310,6 +310,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+    (eval-after-load 'coq `(evil-define-key 'normal coq-mode-map (kbd "RET") 'proof-assert-next-command-interactive))
+    (eval-after-load 'coq `(evil-define-key 'normal coq-mode-map (kbd "DEL") 'proof-undo-last-successful-command))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
