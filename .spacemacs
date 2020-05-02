@@ -30,14 +30,29 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(sql
+     purescript
+     yaml
+     python
+     ocaml
+     haskell
+     (keyboard-layout :variables kl-layout 'bepo)
+     coq
+     (erc :variables
+          erc-server-list
+          '(("irc.freenode.net"
+             :port "6697"
+             :ssl t
+             :nick "kindaro")))
+     cmake
+     c-c++
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
      ;; git
@@ -49,14 +64,12 @@ values."
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     (keyboard-layout :variables kl-layout 'bepo)
-     coq
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(base16-theme)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -134,7 +147,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Inconsolata LGC"
-                               :size 14
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -312,6 +325,9 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
     (eval-after-load 'coq `(evil-define-key 'normal coq-mode-map (kbd "RET") 'proof-assert-next-command-interactive))
     (eval-after-load 'coq `(evil-define-key 'normal coq-mode-map (kbd "DEL") 'proof-undo-last-successful-command))
+    (load-theme 'base16-black-metal-dark-funeral t)
+    (add-hook 'after-change-major-mode-hook '(lambda () (variable-pitch-mode)))
+    (add-hook 'after-change-major-mode-hook '(lambda () (visual-line-mode)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -341,16 +357,32 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coq-one-command-per-line nil)
+ '(custom-safe-themes
+   '("760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" default))
+ '(erc-modules
+   '(completion log spelling services hl-nicks netsplit button match track readonly networks ring autojoin noncommands irccontrols move-to-prompt stamp menu list))
+ '(evil-want-Y-yank-to-eol nil)
+ '(global-undo-tree-mode t)
  '(line-spacing 0.3)
+ '(nil nil t)
  '(package-selected-packages
-   (quote
-    (ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+   '(sqlup-mode sql-indent ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+ '(proof-auto-raise-buffers nil)
+ '(proof-multiple-frames-enable t)
+ '(psc-ide-add-import-on-completion t)
+ '(psc-ide-rebuild-on-save nil)
+ '(send-mail-function 'mailclient-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coq-solve-tactics-face ((t (:foreground "dark magenta"))))
+ '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "dark olive green"))))
+ '(font-lock-comment-face ((t (:foreground "dim gray"))))
  '(proof-locked-face ((((type x) (class color) (background light)) (:background "#201030" :extend t)) (((type x) (class color) (background dark)) (:background "#201030" :extend t)) (((type mswindows) (class color) (background light)) (:background "#201030" :extend t)) (((type mswindows) (class color) (background dark)) (:background "#201030" :extend t)) (((type w32) (class color) (background light)) (:background "#201030" :extend t)) (((type w32) (class color) (background dark)) (:background "#201030" :extend t)) (((type gtk) (class color) (background light)) (:background "#201030" :extend t)) (((type gtk) (class color) (background dark)) (:background "#201030" :extend t)) (((type mac) (class color) (background light)) (:background "#201030" :extend t)) (((type mac) (class color) (background dark)) (:background "#201030" :extend t)) (((type carbon) (class color) (background light)) (:background "#201030" :extend t)) (((type carbon) (class color) (background dark)) (:background "#201030" :extend t)) (((type ns) (class color) (background light)) (:background "#201030" :extend t)) (((type ns) (class color) (background dark)) (:background "#201030" :extend t)) (((type x-toolkit) (class color) (background light)) (:background "#201030" :extend t)) (((type x-toolkit) (class color) (background dark)) (:background "#201030" :extend t)) (t (:underline t :extend t))))
  '(proof-queue-face ((((type x) (class color) (background light)) (:background "#302010" :extend t)) (((type x) (class color) (background dark)) (:background "#302010" :extend t)) (((type mswindows) (class color) (background light)) (:background "#302010" :extend t)) (((type mswindows) (class color) (background dark)) (:background "#302010" :extend t)) (((type w32) (class color) (background light)) (:background "#302010" :extend t)) (((type w32) (class color) (background dark)) (:background "#302010" :extend t)) (((type gtk) (class color) (background light)) (:background "#302010" :extend t)) (((type gtk) (class color) (background dark)) (:background "#302010" :extend t)) (((type mac) (class color) (background light)) (:background "#302010" :extend t)) (((type mac) (class color) (background dark)) (:background "#302010" :extend t)) (((type carbon) (class color) (background light)) (:background "#302010" :extend t)) (((type carbon) (class color) (background dark)) (:background "#302010" :extend t)) (((type ns) (class color) (background light)) (:background "#302010" :extend t)) (((type ns) (class color) (background dark)) (:background "#302010" :extend t)) (((type x-toolkit) (class color) (background light)) (:background "#302010" :extend t)) (((type x-toolkit) (class color) (background dark)) (:background "#302010" :extend t)) (t (:underline t :extend t))))
- '(variable-pitch ((t (:height 1.2 :family "URW Bookman")))))
-))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "VioletRed3"))))
+ '(variable-pitch ((t (:height 1.2 :family "Merriweather")))))
+)
+(set-fontset-font t nil (font-spec :size 20 :name "Symbola"))
