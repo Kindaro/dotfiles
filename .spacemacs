@@ -330,6 +330,13 @@ you should place your code here."
     (load-theme 'base16-black-metal-dark-funeral t)
     (add-hook 'after-change-major-mode-hook '(lambda () (variable-pitch-mode)))
     (add-hook 'after-change-major-mode-hook '(lambda () (visual-line-mode)))
+    (set-fontset-font t nil (font-spec :size 20 :name "Symbola"))
+    (set-fontset-font t 'greek (font-spec :size 20 :name "GFS Olga"))
+    (server-start)
+    (setq load-path (append (list (expand-file-name "/usr/share/emacs/site-lisp/")) load-path))
+    (autoload 'LilyPond-mode "lilypond-mode")
+    (setq auto-mode-alist
+          (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
