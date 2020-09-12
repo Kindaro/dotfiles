@@ -1,5 +1,4 @@
 # Graphics.
-OPTIONS=DECgraphics
 OPTIONS=color
 OPTIONS=use_inverse
 OPTIONS=lit_corridor
@@ -7,6 +6,17 @@ OPTIONS=hilite_pet
 OPTIONS=hilite_pile
 OPTIONS:boulder:0
 OPTIONS=msg_window:full
+
+## Curses.
+OPTIONS=windowtype:curses
+OPTIONS=symset:curses
+OPTIONS=align_message:bottom
+OPTIONS=align_status:right
+OPTIONS=petattr:u
+OPTIONS=popup_dialog
+OPTIONS=splash_screen
+OPTIONS=guicolor
+OPTIONS=mouse_support
 
 # Display.
 OPTIONS=time
