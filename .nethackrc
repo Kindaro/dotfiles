@@ -1,14 +1,25 @@
-OPTIONS=color=true
-OPTIONS=number_pad=0
-OPTIONS=autopickup=false
-OPTIONS=lit_corridor=true
-OPTIONS=boulder:0
-OPTIONS=time=true
-OPTIONS=DECgraphics=true
-OPTIONS=altmeta=true
-OPTIONS=hitpointbar=true
-OPTIONS=pettype=cat
-OPTIONS=catname=Tabby
-OPTIONS=msg_window=full
-OPTIONS=name=Kindaro-priest-human-lawful-male
-OPTIONS=use_inverse=true
+# Graphics.
+OPTIONS=DECgraphics
+OPTIONS=color
+OPTIONS=use_inverse
+OPTIONS=lit_corridor
+OPTIONS=hilite_pet
+OPTIONS=hilite_pile
+OPTIONS:boulder:0
+OPTIONS=msg_window:full
+
+# Display.
+OPTIONS=time
+OPTIONS=hitpointbar
+OPTIONS=showexp
+
+# Control.
+OPTIONS=number_pad:0
+OPTIONS=altmeta
+
+# Game play.
+OPTIONS=autopickup:false
+
+# Role.
+OPTIONS=pettype:cat, catname:Tabby
+OPTIONS=name:Kindaro, role:priest, race:human, align:lawful, gender:male
