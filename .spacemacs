@@ -330,8 +330,11 @@ you should place your code here."
     (load-theme 'base16-black-metal-dark-funeral t)
     (add-hook 'after-change-major-mode-hook '(lambda () (variable-pitch-mode)))
     (add-hook 'after-change-major-mode-hook '(lambda () (visual-line-mode)))
-    (set-fontset-font t nil (font-spec :size 20 :name "Symbola"))
-    (set-fontset-font t 'greek (font-spec :size 20 :name "GFS Olga"))
+    (set-fontset-font t nil (font-spec :size 18 :name "Symbola"))
+    (set-fontset-font t 'greek (font-spec :size 18 :name "GFS Olga"))
+    ;; (set-fontset-font t '(#x2200 . #x22ff) (font-spec :size 16 :name "Symbola")) ;; Mathematics.
+    (set-fontset-font t '(#x2295 . #x229d) (font-spec :size 22 :name "Symbola")) ;; Especially hard to read mathematics.
+    (set-fontset-font t '(#x2190 . #x21ff) (font-spec :size 18 :name "Symbola")) ;; Arrows
     (server-start)
     (setq load-path (append (list (expand-file-name "/usr/share/emacs/site-lisp/")) load-path))
     (autoload 'LilyPond-mode "lilypond-mode")
