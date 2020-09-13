@@ -23,6 +23,15 @@ OPTIONS=time
 OPTIONS=hitpointbar
 OPTIONS=showexp
 
+# Colours.
+OPTIONS=menucolors
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" holy "=green
+MENUCOLOR=" uncursed "=yellow
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" unholy "=red
+MENUCOLOR=" cursed .* (being worn)"=orange&underline
+
 # Control.
 OPTIONS=number_pad:0
 OPTIONS=altmeta
