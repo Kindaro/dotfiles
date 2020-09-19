@@ -10,7 +10,7 @@ OPTIONS=msg_window:full
 ## Curses.
 OPTIONS=windowtype:curses
 OPTIONS=symset:curses
-OPTIONS=align_message:bottom
+OPTIONS=align_message:top
 OPTIONS=align_status:right
 OPTIONS=petattr:u
 OPTIONS=popup_dialog
