@@ -37,7 +37,7 @@ function set-prompt ()
 
     if command -v git >/dev/null
     then
-        git_branch=`git rev-parse --verify --abbrev-ref --short @`
+        git_branch=`git rev-parse --verify --abbrev-ref --short @ 2>/dev/null`
         git_branch_status=$?
         if [[ $git_branch_status -eq 0 ]]
         then
