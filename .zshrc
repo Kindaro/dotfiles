@@ -33,16 +33,15 @@ function set-prompt ()
     EPS1='%{[32m%}%B%#%b%{[00m%} '
     PS1="${${KEYMAP/vicmd/$NPS1}/(main|viins)/$EPS1}"
 
-    # Display some information on the right prompt.
-    RPS_PATH='%{[34m%}%3~%{[00m%} '
+    # Display some information in the terminal window title.
 
     if command -v git >/dev/null
     then
-        git_branch=`git branch 2>/dev/null | grep '^\* ' 2>/dev/null`
+        git_branch=`git rev-parse --verify --abbrev-ref --short @`
         git_branch_status=$?
         if [[ $git_branch_status -eq 0 ]]
         then
-            RPS_GIT_BRANCH="git:${git_branch#\* } "
+            RPS_GIT_BRANCH=" ${git_branch}"
         else
             RPS_GIT_BRANCH=""
         fi
@@ -50,13 +49,20 @@ function set-prompt ()
 
     if command -v nix >/dev/null && [ "$NIX_STORE" ]
     then
-        RPS_NIX='nix '
+        RPS_NIX=' nix'
     else
         RPS_NIX=''
     fi
 
-    RPS1="${RPS_PATH}${RPS_GIT_BRANCH}${RPS_NIX}"
-    RPS1=${RPS1% } # Every block has a trailing space, but the last one shouldn't.
+    TITLE=`pwd`
+    TITLESHORT="${TITLE#"${HOME}"}"
+    if ! [ "$TITLE" = "$TITLESHORT" ]
+    then TITLE="~${TITLESHORT}"
+    fi
+    if ! [ -z "$RPS_GIT_BRANCH" ]
+    then TITLE="${TITLE}${RPS_GIT_BRANCH}${RPS_NIX}"
+    fi
+    echo -n -e "\033]0;$TITLE\007"
 }
 
 set-prompt
