@@ -56,11 +56,15 @@ function set-prompt ()
 
     TITLE=`pwd`
     TITLESHORT="${TITLE#"${HOME}"}"
-    if ! [ "$TITLE" = "$TITLESHORT" ]
-    then TITLE="~${TITLESHORT}"
-    fi
-    if ! [ -z "$RPS_GIT_BRANCH" ]
-    then TITLE="${TITLE}${RPS_GIT_BRANCH}${RPS_NIX}"
+    if [ "$TITLE" = "$HOME" ]
+    then TITLE=''
+    else
+        if ! [ "$TITLE" = "$TITLESHORT" ]
+        then TITLE="~${TITLESHORT}"
+        fi
+        if ! [ -z "$RPS_GIT_BRANCH" ]
+        then TITLE="${TITLE}${RPS_GIT_BRANCH}${RPS_NIX}"
+        fi
     fi
     echo -n -e "\033]0;$TITLE\007"
 }
