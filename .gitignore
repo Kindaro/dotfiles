@@ -3,3 +3,5 @@ dist-newstyle
 TAGS
 tags
 .psa-stash
+.purs-repl
+.spago

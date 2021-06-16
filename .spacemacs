@@ -30,14 +30,16 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
+   '(rust
+     idris
+     typescript
      javascript
      sql
      purescript
      yaml
      python
      ocaml
-     haskell
+     (haskell :variables haskell-enable-ghc-mod-support nil)
      (keyboard-layout :variables kl-layout 'bepo)
      coq
      (erc :variables
@@ -47,7 +49,9 @@ values."
              :ssl t
              :nick "kindaro")))
      cmake
-     c-c++
+     lsp
+     gpu
+     (c-c++ :variables c-c++-backend 'lsp-clangd c-c++-lsp-enable-semantic-highlight 'rainbow)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -58,13 +62,13 @@ values."
      ;; better-defaults
      emacs-lisp
      ;; git
-     ;; markdown
+     markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
@@ -362,9 +366,10 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(global-undo-tree-mode t)
  '(line-spacing 0.3)
+ '(lsp-ui-sideline-enable nil)
  '(nil nil t)
  '(package-selected-packages
-   '(typescript-mode import-js grizzl emmet-mode add-node-modules-path ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+   '(toml-mode ron-mode racer helm-gtags ggtags flycheck-rust dap-mode bui counsel-gtags counsel swiper ivy cargo rust-mode yapfify yaml-mode web-beautify utop tuareg caml tide typescript-mode sql-indent pyvenv pytest pyenv-mode py-isort psci purescript-mode psc-ide flycheck pip-requirements ocp-indent merlin livid-mode skewer-mode simple-httpd live-py-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc idris-mode prop-menu hy-mode dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-company helm-c-yasnippet haskell-snippets fuzzy erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks disaster cython-mode company-statistics company-ghci haskell-mode company-cabal company-c-headers company-anaconda company coffee-mode cmm-mode cmake-mode clang-format base16-theme auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile alect-themes aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))
  '(proof-auto-raise-buffers nil)
  '(proof-multiple-frames-enable t)
  '(psc-ide-add-import-on-completion t t)
@@ -378,8 +383,22 @@ This function is called at the very end of Spacemacs initialization."
  '(coq-solve-tactics-face ((t (:foreground "dark magenta"))))
  '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "dark olive green"))))
  '(font-lock-comment-face ((t (:foreground "dim gray"))))
+ '(highlight ((t (:foreground "#FFFFFF"))))
  '(proof-locked-face ((((type x) (class color) (background light)) (:background "#201030" :extend t)) (((type x) (class color) (background dark)) (:background "#201030" :extend t)) (((type mswindows) (class color) (background light)) (:background "#201030" :extend t)) (((type mswindows) (class color) (background dark)) (:background "#201030" :extend t)) (((type w32) (class color) (background light)) (:background "#201030" :extend t)) (((type w32) (class color) (background dark)) (:background "#201030" :extend t)) (((type gtk) (class color) (background light)) (:background "#201030" :extend t)) (((type gtk) (class color) (background dark)) (:background "#201030" :extend t)) (((type mac) (class color) (background light)) (:background "#201030" :extend t)) (((type mac) (class color) (background dark)) (:background "#201030" :extend t)) (((type carbon) (class color) (background light)) (:background "#201030" :extend t)) (((type carbon) (class color) (background dark)) (:background "#201030" :extend t)) (((type ns) (class color) (background light)) (:background "#201030" :extend t)) (((type ns) (class color) (background dark)) (:background "#201030" :extend t)) (((type x-toolkit) (class color) (background light)) (:background "#201030" :extend t)) (((type x-toolkit) (class color) (background dark)) (:background "#201030" :extend t)) (t (:underline t :extend t))))
  '(proof-queue-face ((((type x) (class color) (background light)) (:background "#302010" :extend t)) (((type x) (class color) (background dark)) (:background "#302010" :extend t)) (((type mswindows) (class color) (background light)) (:background "#302010" :extend t)) (((type mswindows) (class color) (background dark)) (:background "#302010" :extend t)) (((type w32) (class color) (background light)) (:background "#302010" :extend t)) (((type w32) (class color) (background dark)) (:background "#302010" :extend t)) (((type gtk) (class color) (background light)) (:background "#302010" :extend t)) (((type gtk) (class color) (background dark)) (:background "#302010" :extend t)) (((type mac) (class color) (background light)) (:background "#302010" :extend t)) (((type mac) (class color) (background dark)) (:background "#302010" :extend t)) (((type carbon) (class color) (background light)) (:background "#302010" :extend t)) (((type carbon) (class color) (background dark)) (:background "#302010" :extend t)) (((type ns) (class color) (background light)) (:background "#302010" :extend t)) (((type ns) (class color) (background dark)) (:background "#302010" :extend t)) (((type x-toolkit) (class color) (background light)) (:background "#302010" :extend t)) (((type x-toolkit) (class color) (background dark)) (:background "#302010" :extend t)) (t (:underline t :extend t))))
  '(rainbow-delimiters-depth-8-face ((t (:foreground "VioletRed3"))))
  '(variable-pitch ((t (:height 1.2 :family "Merriweather")))))
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(yapfify yaml-mode web-beautify utop tuareg caml tide typescript-mode sql-indent pyvenv pytest pyenv-mode py-isort psci purescript-mode psc-ide flycheck pip-requirements ocp-indent merlin livid-mode skewer-mode simple-httpd live-py-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc idris-mode prop-menu hy-mode dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-company helm-c-yasnippet haskell-snippets fuzzy erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks disaster cython-mode company-statistics company-ghci haskell-mode company-cabal company-c-headers company-anaconda company coffee-mode cmm-mode cmake-mode clang-format base16-theme auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile alect-themes aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

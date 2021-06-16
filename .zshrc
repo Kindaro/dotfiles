@@ -2,8 +2,6 @@ setopt interactivecomments
 autoload -Uz promptinit
 promptinit
 
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 set -o vi 
 export HISTSIZE=1048576
 export SAVEHIST=1048576
@@ -120,7 +118,7 @@ unix-word-rubout () {
 zle -N unix-word-rubout
 bindkey -M viins '^W' unix-word-rubout
 
-alias git-log='git log --oneline --graph --all --color -n 47'
+alias git-log='git log --oneline --graph --branches --tags --color -n 47'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -132,7 +130,7 @@ export LESS_TERMCAP_so=$'\e[7m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-alias t='tree -Flatr -I ".git|dist|dist-newstyle"'
+alias t='tree -Flatr -I ".git|dist|dist-newstyle|node_modules|bower_components|.spago"'
 
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
@@ -155,3 +153,27 @@ setopt autopushd pushdminus pushdsilent pushdtohome pushd_ignore_dups
 alias dh='dirs -v'
 
 alias jour="date +'%A, %-d of %B %Y'"
+
+# https://stackoverflow.com/a/13021677
+NPM_PACKAGES="$HOME/.npm-packages"
+PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+
+function success
+{
+    play  --no-show-progress -n synth 2.0 sine C4
+    echo '\n[32;1m\tsuccess[0m\n'
+}
+
+function failure
+{
+    play  --no-show-progress -n synth 0.2 sine E5
+    echo '\n[31;1m\tfailure[0m\n'
+}
+
+function gitwatch
+{
+    inotifywait --event close_write --recursive `git ls-files`
+}
