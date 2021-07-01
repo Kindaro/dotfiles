@@ -173,7 +173,22 @@ function failure
     echo '\n[31;1m\tfailure[0m\n'
 }
 
+function try
+{
+    if eval "$@"
+    then success
+    else failure
+    fi
+}
+
 function gitwatch
 {
     inotifywait --event close_write --recursive `git ls-files`
+}
+
+function open
+{
+    target="$1"
+    stat "$target" >/dev/null || return 1
+    zathura "$target" & disown
 }
