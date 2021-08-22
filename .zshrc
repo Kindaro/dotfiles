@@ -196,5 +196,5 @@ function open
 function edit
 {
     target="$1"
-    emacsclient --create-frame "$target" & disown
+    emacsclient --no-wait --create-frame "$target"
 }
