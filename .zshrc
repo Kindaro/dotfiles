@@ -192,3 +192,9 @@ function open
     stat "$target" >/dev/null || return 1
     zathura "$target" & disown
 }
+
+function edit
+{
+    target="$1"
+    emacsclient --create-frame "$target" & disown
+}
